@@ -1,1 +1,2 @@
 pyodbc==4.0.35
+matplotlib==3.5.3

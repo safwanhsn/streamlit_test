@@ -1,2 +1,10 @@
 pyodbc==4.0.35
 matplotlib==3.5.3
+plotly==5.10.0
+altair==4.2.2
+
+azure-core==1.26.3
+azure-identity==1.12.0
+azure-storage-blob==12.15.0
+azure-storage-file-datalake==12.10.0
+streamlit-aggrid==0.3.4

@@ -17,7 +17,7 @@ from azure.storage.filedatalake._models import ContentSettings
 
 from st_aggrid import AgGrid
 
-from obs_query import get_temps
+# from obs_query import get_temps
 
 #! TODO: Move these to another file
 #! Probably need to write a query to somehow obtain the necessary logs based on my previous mapping? Or use DIP - Identify OBS wells 
@@ -314,24 +314,24 @@ with st.expander('Temperature Profiler'):
 
 
 
-if r1 == True:
-        with st.spinner('Querying Temperature Profile...'):
+# if r1 == True:
+#         with st.spinner('Querying Temperature Profile...'):
                 
-                st.session_state.temp_queried = True
-                temps = get_temps(c, s3, s4, sl1[1], sl1[0])
-                st.session_state.temp = temps
-                temp2 = pd.melt(st.session_state.temp.reset_index(), id_vars='Date', var_name = 'DEPT')
-                temp2 = temp2[pd.to_numeric(temp2.value, errors='coerce').notnull()]
-                st.session_state.temp2 = temp2
+#                 st.session_state.temp_queried = True
+#                 temps = get_temps(c, s3, s4, sl1[1], sl1[0])
+#                 st.session_state.temp = temps
+#                 temp2 = pd.melt(st.session_state.temp.reset_index(), id_vars='Date', var_name = 'DEPT')
+#                 temp2 = temp2[pd.to_numeric(temp2.value, errors='coerce').notnull()]
+#                 st.session_state.temp2 = temp2
 
        
-        testdf = pd.read_csv('savedata.csv')
-        testdf.drop_duplicates(inplace=True)
-        savedata = pd.DataFrame([], columns=['1','2','3','4','5'])
-        savedata[str(h1)] = [s2]
-        final = pd.concat([testdf, savedata],axis=0)
-        final.drop_duplicates(inplace=True)
-        final.to_csv('savedata.csv', index=False, header=True)
+#         testdf = pd.read_csv('savedata.csv')
+#         testdf.drop_duplicates(inplace=True)
+#         savedata = pd.DataFrame([], columns=['1','2','3','4','5'])
+#         savedata[str(h1)] = [s2]
+#         final = pd.concat([testdf, savedata],axis=0)
+#         final.drop_duplicates(inplace=True)
+#         final.to_csv('savedata.csv', index=False, header=True)
             
 
 #Query SAGD parent data
@@ -351,16 +351,16 @@ if bool_sagd_parent == True:
     """
     # parent_sagd_df = pd.read_sql(well_dict_qry, cursor)
 
-if (c != st.session_state.c) & (st.session_state.temp_queried == True):
-    with st.spinner('Querying Temperature Profile...'):
-        temps = get_temps(c, s3, s4, sl1[1], sl1[0])
-        st.session_state.temp = temps
-        temp2 = pd.melt(st.session_state.temp.reset_index(), id_vars='Date', var_name = 'DEPT')
-        temp2 = temp2[pd.to_numeric(temp2.value, errors='coerce').notnull()]
-        st.session_state.temp2 = temp2
-        st.session_state.c = c
-        #* This C will be used to control temp profiling
-        #* This code for temp. profiling
+# if (c != st.session_state.c) & (st.session_state.temp_queried == True):
+#     with st.spinner('Querying Temperature Profile...'):
+#         temps = get_temps(c, s3, s4, sl1[1], sl1[0])
+#         st.session_state.temp = temps
+#         temp2 = pd.melt(st.session_state.temp.reset_index(), id_vars='Date', var_name = 'DEPT')
+#         temp2 = temp2[pd.to_numeric(temp2.value, errors='coerce').notnull()]
+#         st.session_state.temp2 = temp2
+#         st.session_state.c = c
+#         #* This C will be used to control temp profiling
+#         #* This code for temp. profiling
 
 if ae == True:
     for selected in ab:
@@ -388,20 +388,20 @@ for column in data.columns:
     sample = data[column]
     for s in sample:
 
-        if s == 'DTS':
-            # temps = pd.read_csv('temp_temp.csv').set_index('Date')
-            # st.write(temps)
+        # if s == 'DTS':
+        #     # temps = pd.read_csv('temp_temp.csv').set_index('Date')
+        #     # st.write(temps)
 
-            p1 = px.scatter(x=st.session_state.temp2['value'], 
-                         y=st.session_state.temp2['DEPT'], 
-                         animation_frame=st.session_state.temp2["Date"], 
-                         animation_group=st.session_state.temp2['DEPT'],
-                         color=st.session_state.temp2['value'].astype(float),
-                         color_continuous_scale='rdbu_r',
-                         range_color=[-25,25],
-                        #  range_x=[st.session_state.temp2['value'].min(), st.session_state.temp2['value'].max()]
-                        range_x = [-200, 200]
-                         )
+        #     p1 = px.scatter(x=st.session_state.temp2['value'], 
+        #                  y=st.session_state.temp2['DEPT'], 
+        #                  animation_frame=st.session_state.temp2["Date"], 
+        #                  animation_group=st.session_state.temp2['DEPT'],
+        #                  color=st.session_state.temp2['value'].astype(float),
+        #                  color_continuous_scale='rdbu_r',
+        #                  range_color=[-25,25],
+        #                 #  range_x=[st.session_state.temp2['value'].min(), st.session_state.temp2['value'].max()]
+        #                 range_x = [-200, 200]
+        #                  )
             
             # frames = [go.Frame(data=[p1]) for k in range(10)]
             # fig2 = go.Figure(data = frames[0]["data"],
@@ -453,10 +453,10 @@ for column in data.columns:
                 continue
 
  #! Putting this here for more plot control with aggrid
-with st.expander('Temps'):
-    st.experimental_data_editor(st.session_state.temp2) #! Use AgGrid here later
-    st.download_button(label='Download Temperature Data', data=st.session_state.temp.to_csv().encode('utf-8'), file_name=f'{c}_{s2}_temp_profile.csv', mime='text/csv')
-    #!Use experimental re-load here if values modified
+# with st.expander('Temps'):
+#     st.experimental_data_editor(st.session_state.temp2) #! Use AgGrid here later
+#     st.download_button(label='Download Temperature Data', data=st.session_state.temp.to_csv().encode('utf-8'), file_name=f'{c}_{s2}_temp_profile.csv', mime='text/csv')
+#     #!Use experimental re-load here if values modified
 
 p1.update_layout(margin=dict(l=20, r=20, t=20, b=20))
 p1.update_layout(autosize=False,width=scale*3,height=scale*8, showlegend=True, yaxis_range=[0,180])

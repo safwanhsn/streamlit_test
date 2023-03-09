@@ -65,6 +65,16 @@ with st.sidebar:
 
 conn = init_connection()
 
+query = """
+USE dip
+GO
+
+SELECT * FROM [dbo].[dts_mr_pc_view]
+"""
+
+df = pd.read_sql(query, conn)
+st.write(df)
+
 
 
 

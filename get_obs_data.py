@@ -72,6 +72,9 @@ def init_connection():
         + st.secrets["password"]
         + ";Authentication="
         + st.secrets["authentication"]
+        + ";Encrypt=yes"
+        + ";TrustServerCertificate=no"
+        + ";Connection Timeout=30"
     )
 
 

@@ -6,6 +6,7 @@ Libraries
 import pandas as pd
 import numpy as np 
 import datetime as dt
+import streamlit as st
 
 #Azure
 import io
@@ -34,7 +35,7 @@ def initialize_storage_account(storage_account_name, storage_account_key):
 
 def download_file():
     try:
-        initialize_storage_account('dipdevarmdlsuw2001', 'SkElaMTddmVejnmY6BMnaLlVggUZidga1Te432ifKpUtt9kcraGZusveeOWORhSZv+wXSLc7XcfiPrOEtF5L9A==')
+        initialize_storage_account(st.secrets['azure_conn'], st.secrets['azure_key'])
 
         file_system_client = service_client.get_file_system_client(file_system="gold")
 

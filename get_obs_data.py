@@ -36,7 +36,7 @@ def initialize_storage_account(storage_account_name, storage_account_key):
 
 def download_file():
     try:
-        initialize_storage_account(st.secrets['azure_conn'], st.secrets['azure_key'])
+        # initialize_storage_account(st.secrets['azure_conn'], st.secrets['azure_key'])
 
         file_system_client = service_client.get_file_system_client(file_system="gold")
 

@@ -77,4 +77,32 @@ def init_connection():
         + ";Connection Timeout=30"
     )
 
+def init_connection2():
+    return pyodbc.connect(
+        "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
+        + "dipdevarmsawuw2001-ondemand.sql.azuresynapse.net"
+        + ";DATABASE="
+        "dip"
+        + ";UID="
+        + "sahossain@suncor.com"
+        + ";PWD="
+        + "c0lum8iA@@@@"
+        + ";Authentication="
+        + "ActiveDirectoryPassword"
+        + ";Encrypt=yes"
+        + ";TrustServerCertificate=no"
+        + ";Connection Timeout=30"
+    )
 
+# init_connection2()
+
+conn__string = 'Driver={ODBC Driver 17 for SQL Server};Server=tcp:dipdevarmsawuw2001-ondemand.sql.azuresynapse.net,1433;Database=dip;Uid=powerbiread;Pwd=RN92piTCh%$!~3K98Bl*;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+
+conn = pyodbc.connect(conn__string)
+
+query = """
+SELECT * FROM [dbo].[dts_mr_pc_view]
+"""
+
+df = pd.read_sql(query, conn)
+print(df)

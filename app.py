@@ -63,12 +63,13 @@ with st.sidebar:
 
     #     obsWell = st.selectbox('Observation Well', listObsWells)
 
-conn = init_connection()
+import pyodbc
+
+conn__string = 'Driver={ODBC Driver 17 for SQL Server};Server=tcp:dipdevarmsawuw2001-ondemand.sql.azuresynapse.net,1433;Database=dip;Uid=powerbiread;Pwd=RN92piTCh%$!~3K98Bl*;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+
+conn = pyodbc.connect(conn__string)
 
 query = """
-USE dip
-GO
-
 SELECT * FROM [dbo].[dts_mr_pc_view]
 """
 

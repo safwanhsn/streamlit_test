@@ -30,7 +30,7 @@ State Session Variables
 Page
 """
 #Page Config
-st.set_page_config(page_title='OBS Well Analyzer')
+# st.set_page_config(page_title='OBS Well Analyzer')
 
 #Sidebar
 with st.sidebar:

@@ -7,6 +7,7 @@ import pandas as pd
 import numpy as np 
 import datetime as dt
 import streamlit as st
+import pyodbc
 
 #Azure
 import io
@@ -57,5 +58,20 @@ def download_file():
     except Exception as e:
      print(e)
 
+
+@st.cache_resource
+def init_connection():
+    return pyodbc.connect(
+        "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
+        + st.secrets["server"]
+        + ";DATABASE="
+        + st.secrets["database"]
+        + ";UID="
+        + st.secrets["username"]
+        + ";PWD="
+        + st.secrets["password"]
+        + ";Authentication="
+        + st.secrets["authentication"]
+    )
 
 

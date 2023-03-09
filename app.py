@@ -19,8 +19,7 @@ import altair as alt
 from plotly.subplots import make_subplots
 
 #Loading Data
-from get_obs_data import download_file
-
+from get_obs_data import init_connection
 """
 State Session Variables
 """
@@ -64,7 +63,7 @@ with st.sidebar:
 
     #     obsWell = st.selectbox('Observation Well', listObsWells)
 
-st.write(download_file())      
+conn = init_connection()
 
 
 

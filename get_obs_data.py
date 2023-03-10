@@ -96,7 +96,7 @@ def init_connection2():
 
 # init_connection2()
 
-conn__string = 'Driver={ODBC Driver 17 for SQL Server};Server=tcp:dipdevarmsawuw2001-ondemand.sql.azuresynapse.net,1433;Database=dip;Uid=powerbiread;Pwd=RN92piTCh%$!~3K98Bl*;Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+
 
 conn = pyodbc.connect(conn__string)
 

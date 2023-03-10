@@ -50,7 +50,7 @@ def download_file():
 
         downloadedParquet = io.BytesIO(downloaded_bytes)
 
-        dfParquet = pd.read_parquet(downloadedParquet) #! Speed this up
+        dfParquet = pd.read_parquet(downloadedParquet) 
 
         return dfParquet
 

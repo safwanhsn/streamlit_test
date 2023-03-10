@@ -80,13 +80,8 @@ def init_connection():
 def init_connection2():
     return pyodbc.connect(
         "DRIVER={ODBC Driver 17 for SQL Server};SERVER="
-        + "dipdevarmsawuw2001-ondemand.sql.azuresynapse.net"
         + ";DATABASE="
         "dip"
-        + ";UID="
-        + "sahossain@suncor.com"
-        + ";PWD="
-        + "c0lum8iA@@@@"
         + ";Authentication="
         + "ActiveDirectoryPassword"
         + ";Encrypt=yes"

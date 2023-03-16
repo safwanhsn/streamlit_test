@@ -67,7 +67,7 @@ with st.sidebar:
     with st.expander('Trace Properties'):
         #Init. lists
         listFigNames = [1,2,3,4,5,6]
-        obsAvailableParameters = obs_property[obs_property['COMMON_WELLNAME']==obsWell].PARAMETER_DESCRIPTION.unique()
+        obsAvailableParameters = obs_property[obs_property['COMMON_WELLNAME']==obsWell].PROPERTY_DESCRIPTION.unique()
 
         #! Temp form structure
         with st.form(clear_on_submit=False):

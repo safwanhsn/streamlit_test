@@ -94,12 +94,14 @@ with st.sidebar:
                     st.session_state.traceSelectionMatrix = pd.concat(toAppend,axis=0)
                     st.session_state.traceSelectionMatrix.drop_duplicates(inplace=True)
                     #! Or use short out refresh here
-            st.experimental_data_editor(st.session_state.traceSelectionMatrix,use_container_width=True)
+                    st.experimental_rerun()
+            # st.experimental_data_editor(st.session_state.traceSelectionMatrix,use_container_width=True)
 
 
         #Clear All Figures Action
         if clearAllTraces==True:
             st.session_state.traceSelectionMatrix = st.session_state.traceSelectionMatrix.iloc[0:0]
+            st.experimental_rerun()
             
 #! Move logic out of expander?
         

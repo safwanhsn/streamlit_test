@@ -36,8 +36,6 @@ if ['figureSelectIndex', 'listFigNames'] not in st.session_state:
 if ['traceSelectionMatrix'] not in st.session_state:
     st.session_state.traceSelectionMatrix = pd.DataFrame([[np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]],columns=st.session_state.listFigNames)
 
-if ['list1', 'list2', 'list']
-
 # """
 # Page
 # """

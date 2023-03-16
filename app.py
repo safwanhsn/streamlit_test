@@ -26,8 +26,15 @@ from get_obs_data import get_obs_dict, get_obs_property
 obs_dict = get_obs_dict()
 obs_property = get_obs_property()
 
-if ['figureSelectIndex'] not in st.session_state:
+#! Add this to state actually
+
+#Figure Properties State Variables
+if ['figureSelectIndex', 'listFigNames'] not in st.session_state:
     st.session_state.figureSelectIndex = 0
+    st.session_state.listFigNames = [1,2,3,4,5,6]
+
+if ['traceSelectionMatrix'] not in st.session_state:
+    st.session_state.traceSelectionMatrix = pd.DataFrame([],columns=st.session_state.listFigNames)
 
 # """
 # Page
@@ -65,18 +72,37 @@ with st.sidebar:
     
     #Trace Properties Section
     with st.expander('Trace Properties'):
-        #Init. lists
-        listFigNames = [1,2,3,4,5,6]
-        obsAvailableParameters = obs_property[obs_property['COMMON_WELLNAME']==obsWell].PROPERTY_DESCRIPTION.unique()
+        # obsAvailableParameters = obs_property[obs_property['COMMON_WELLNAME']==obsWell].PROPERTY_DESCRIPTION.unique()
 
         #! Temp form structure
         with st.form("Trace Select", clear_on_submit=False):
             chartScale = int(st.slider(label='Chart Scale',min_value=1, max_value=200, value=100))
-            figureSelect = st.selectbox('Figure', listFigNames, index=st.session_state.figureSelectIndex)
-            parameterToTrace = st.multiselect('Parameters to Trace', obsAvailableParameters)
+            figureSelect = st.selectbox('Figure', st.session_state.listFigNames, index=st.session_state.figureSelectIndex)
+            parameterToTrace = st.multiselect('Parameters to Trace', availableParameter)
             parameterTraceAction = st.selectbox("Select Action", ['Add Traces', 'Clear Figure'])
             parameterTraceSubmit = st.form_submit_button("Submit")
         clearAllTraces = st.button('Clear All')
+
+        st.experimental_data_editor(st.session_state.traceSelectionMatrix, use_container_width=True)
+
+        #Parameter Trace Submit Actions
+        if parameterTraceSubmit:
+            if parameterTraceAction == 'Add Traces':
+                for parameter in parameterToTrace:
+                    parametersToAppend = pd.DataFrame([],columns=st.session_state.listFigNames)
+                    parametersToAppend[str(figureSelect)] = parameter
+                    toAppend = [st.session_state.traceSelectionMatrix, parametersToAppend]
+                    st.session_state.traceSelectionMatrix = pd.concat(toAppend,axis=0)
+                    st.session_state.traceSelectionMatrix.drop_duplicates(inplace=True)
+
+
+        #Clear All Figures Action
+        if clearAllTraces:
+            st.session_state.traceSelectionMatrix = st.session_state.traceSelectionMatrix.iloc[0:0]
+
+        
+
+
 
 
 

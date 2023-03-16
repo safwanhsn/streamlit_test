@@ -88,6 +88,7 @@ with st.sidebar:
         #Parameter Trace Submit Actions
         if parameterTraceSubmit:
             if parameterTraceAction == 'Add Traces':
+                st.write('YES')
                 for parameter in parameterToTrace:
                     parametersToAppend = pd.DataFrame([],columns=st.session_state.listFigNames)
                     parametersToAppend[str(figureSelect)] = parameter

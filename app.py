@@ -1,6 +1,6 @@
-"""
-Libraries
-"""
+# """
+# Libraries
+# """
 
 #Streamlit components
 from st_aggrid import AgGrid
@@ -20,15 +20,19 @@ from plotly.subplots import make_subplots
 
 #Loading Data
 from get_obs_data import get_obs_dict, get_obs_property
-"""
-State Session Variables
-"""
+# """
+# State Session Variables
+# """
 obs_dict = get_obs_dict()
 obs_property = get_obs_property()
 
-"""
-Page
-"""
+if ['figureSelectIndex'] not in st.session_state:
+    st.session_state.figureSelectIndex = 0
+
+# """
+# Page
+# """
+
 #Page Config
 # st.set_page_config(page_title='OBS Well Analyzer')
 
@@ -43,20 +47,11 @@ with st.sidebar:
     # Filter Section
     with st.expander("Filter"):
         #init. lists
-    #     listPads = obsDictionary.SURFACE_PAD.unique()
-    #     #! List Patterns?
-    #     listParentWells = obsDictionary.WELL_PAIR.unique()
         listParameters = ['M_GR', 'LVMIFACIES', 'I_LVMI', 'I_BMFO', 'THERMOCOUPLE_TEMP', 'DTS_TEMP']
         listObsWells = obs_dict.COMMON_WELLNAME.unique()
         #! Save hardcoded lists to a csv in data folder of github
-        
 
-
-        
-
-    #     #! Insert Filter Function Here
     #     surfacePad = st.multiselect('By Surface Pad', listPads)
-
     #     parentWell = st.multiselect('By Parent Well-Pair', listParentWells)
 
         availableParameter = st.multiselect('By Available Parameters', listParameters)
@@ -66,12 +61,24 @@ with st.sidebar:
                                         (obs_property['PROPERTY_SHORT_NAME'].isin(availableParameter))] \
                                         .COMMON_WELLNAME.unique()
 
-
-    #     # wellType = st.multiselect('By Well Type', ('Observation', 'Vertical (WIP)')) #! DIP does not contain the metadata to do this yet I believe
-
-    #     #! I think I want to do the above filtering like a form - And then maybe query the logs or a presaved csv or something or like distinct wihtin logs or query all log and filter to make list idk
-
         obsWell = st.selectbox('Observation Well', listObsWells)
+    
+    #Trace Properties Section
+    with st.expander('Trace Properties'):
+        #Init. lists
+        listFigNames = [1,2,3,4,5,6]
+        obsAvailableParameters = obs_property[obs_property['COMMON_WELLNAME']==obsWell].PARAMETER_DESCRIPTION.unique()
+
+        #! Temp form structure
+        with st.form(clear_on_submit=False):
+            chartScale = int(st.slider(label='Chart Scale',min_value=1, max_value=200, value=100))
+            figureSelect = st.selectbox('Figure', listFigNames, index=st.session_state.figureSelectIndex)
+            parameterToTrace = st.multiselect('Parameters to Trace', obsAvailableParameters)
+            parameterTraceAction = st.selectbox("Select Action", ['Add Traces', 'Clear Figure'])
+            parameterTraceSubmit = st.form_submit_button("Submit")
+        clearAllTraces = st.button('Clear All')
+
+
 
 
 

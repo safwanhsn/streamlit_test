@@ -91,8 +91,7 @@ def init_connection2():
 
 @st.cache_resource()
 def create_conn():
-    print(st.secrets['synapse_conn'])
-    conn_string = "Driver={ODBC Driver 17 for SQL Server};Server=tcp:"
+    conn = pyodbc.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:"
     +st.secrets['synapse_conn']
     +",1433;Database="
     +st.secrets['synapse_db']
@@ -100,9 +99,9 @@ def create_conn():
     +st.secrets['synapse_uid']
     +";Pwd="
     +st.secrets['synapse_pwd']
-    +";Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+    +";Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
 
-    conn = pyodbc.connect(conn_string)
+    # conn = pyodbc.connect(conn_string)
 
     return conn
 

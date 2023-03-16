@@ -91,15 +91,17 @@ def init_connection2():
 
 @st.cache_resource()
 def create_conn():
-    conn = pyodbc.connect("Driver={ODBC Driver 17 for SQL Server};Server=tcp:"
-    +st.secrets['synapse_conn']
-    +",1433;Database="
-    +st.secrets['synapse_db']
-    +";Uid="
-    +st.secrets['synapse_uid']
-    +";Pwd="
-    +st.secrets['synapse_pwd']
-    +";Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;")
+    conn = pyodbc.connect(
+        "Driver={ODBC Driver 17 for SQL Server};Server=tcp:"
+        +st.secrets['synapse_conn']
+        +",1433;Database="
+        +st.secrets['synapse_db']
+        +";Uid="
+        +st.secrets['synapse_uid']
+        +";Pwd="
+        +st.secrets['synapse_pwd']
+        +";Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;"
+    )
 
     # conn = pyodbc.connect(conn_string)
 
@@ -110,7 +112,7 @@ def get_obs_data(query):
     
     conn = create_conn()
 
-    df = pd.read(query, conn)
+    df = pd.read_sql(query, conn)
 
     # conn.close()
 

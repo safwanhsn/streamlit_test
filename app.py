@@ -83,7 +83,7 @@ with st.sidebar:
             parameterTraceSubmit = st.form_submit_button("Submit")
         clearAllTraces = st.button('Clear All')
 
-        st.write(st.session_state.traceSelectionMatrix, use_container_width=True)
+        st.write(st.session_state.traceSelectionMatrix)
 
         #Parameter Trace Submit Actions
         if parameterTraceSubmit:

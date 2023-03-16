@@ -92,9 +92,9 @@ def init_connection2():
 @st.cache_resource()
 def create_conn():
     print(st.secrets['synapse_conn'])
-    conn_string = "Driver={ODBC Driver 17 for SQL Server};Server="
+    conn_string = "Driver={ODBC Driver 17 for SQL Server};Server=tcp:"
     +st.secrets['synapse_conn']
-    +";Database="
+    +",1433;Database="
     +st.secrets['synapse_db']
     +";Uid="
     +st.secrets['synapse_uid']

@@ -95,6 +95,7 @@ with st.sidebar:
                     st.write(st.session_state.traceSelectionMatrix)
                     st.write(parametersToAppend)
                     st.session_state.traceSelectionMatrix = pd.concat([st.session_state.traceSelectionMatrix, parametersToAppend],axis=0)
+                    st.write(st.session_state.traceSelectionMatrix)
                     # st.session_state.traceSelectionMatrix.drop_duplicates(inplace=True)
 
 

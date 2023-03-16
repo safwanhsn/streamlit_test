@@ -93,7 +93,9 @@ def init_connection2():
 def create_conn():
     conn_string = 'Driver={ODBC Driver 17 for SQL Server};Server='
     +st.secrets['synapse_conn']
-    +';Database=dip;Uid='
+    +';Database='
+    +st.secrets['synapse_db']
+    +';Uid='
     +st.secrets['synapse_uid']
     +';Pwd='
     +st.secrets['synapse_pwd']

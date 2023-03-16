@@ -26,18 +26,14 @@ from get_obs_data import get_obs_dict, get_obs_property
 obs_dict = get_obs_dict()
 obs_property = get_obs_property()
 
-#! Add this to state actually
-
 #Figure Properties State Variables
 if ['figureSelectIndex', 'listFigNames'] not in st.session_state:
     st.session_state.figureSelectIndex = 0
     st.session_state.listFigNames = ['1','2','3','4','5','6']
 
 if 'traceSelectionMatrix' not in st.session_state:
-    st.write('True')
     st.session_state.traceSelectionMatrix = pd.DataFrame([],columns=st.session_state.listFigNames)
-else:
-    st.write('False')
+
 
 # """
 # Page
@@ -86,7 +82,7 @@ with st.sidebar:
             parameterTraceSubmit = st.form_submit_button("Submit")
         clearAllTraces = st.button('Clear All')
 
-        st.write(st.session_state.traceSelectionMatrix)
+        st.experimental_data_editor(st.session_state.traceSelectionMatrix,use_container_width=True)
 
         #Parameter Trace Submit Actions
         if parameterTraceSubmit==True:
@@ -95,19 +91,17 @@ with st.sidebar:
                     parametersToAppend = pd.DataFrame([],columns=st.session_state.listFigNames)
                     parametersToAppend.at[1, str(figureSelect)] = parameter
                     toAppend = [st.session_state.traceSelectionMatrix, parametersToAppend]
-                    st.write(st.session_state.traceSelectionMatrix)
-                    st.write(parametersToAppend)
-                    st.session_state.traceSelectionMatrix = pd.concat([st.session_state.traceSelectionMatrix, parametersToAppend],axis=0)
-                    st.write(st.session_state.traceSelectionMatrix)
+                    st.session_state.traceSelectionMatrix = pd.concat(toAppend,axis=0)
                     st.session_state.traceSelectionMatrix.drop_duplicates(inplace=True)
+                    #! Or use short out refresh here
+            st.experimental_data_editor(st.session_state.traceSelectionMatrix,use_container_width=True)
 
 
         #Clear All Figures Action
         if clearAllTraces==True:
-            st.write('Cler True')
-            # st.session_state.traceSelectionMatrix = st.session_state.traceSelectionMatrix.iloc[0:0]
+            st.session_state.traceSelectionMatrix = st.session_state.traceSelectionMatrix.iloc[0:0]
             
-#! Move logic out of expander
+#! Move logic out of expander?
         
 
 

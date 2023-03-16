@@ -78,7 +78,7 @@ with st.sidebar:
         with st.form("Trace Select", clear_on_submit=False):
             chartScale = int(st.slider(label='Chart Scale',min_value=1, max_value=200, value=100))
             figureSelect = st.selectbox('Figure', st.session_state.listFigNames, index=st.session_state.figureSelectIndex)
-            parameterToTrace = st.multiselect('Parameters to Trace', availableParameter)
+            parameterToTrace = st.multiselect('Parameters to Trace', listParameters)
             parameterTraceAction = st.selectbox("Select Action", ['Add Traces', 'Clear Figure'])
             parameterTraceSubmit = st.form_submit_button("Submit")
         clearAllTraces = st.button('Clear All')

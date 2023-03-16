@@ -89,15 +89,43 @@ def init_connection2():
         + ";Connection Timeout=30"
     )
 
-# init_connection2()
+@st.cache_resource()
+def create_conn():
+    conn_string = 'Driver={ODBC Driver 17 for SQL Server};Server='
+    +st.secrets['synapse_conn']
+    +';Database=dip;Uid='
+    +st.secrets['synapse_uid']
+    +';Pwd='
+    +st.secrets['synapse_pwd']
+    +';Encrypt=yes;TrustServerCertificate=no;Connection Timeout=30;'
+
+    conn = pyodbc.connect(conn_string)
+
+    return conn
 
 
+def get_obs_data(query):
+    
+    conn = create_conn()
 
-conn = pyodbc.connect(conn__string)
+    df = pd.read(query, conn)
 
-query = """
-SELECT * FROM [dbo].[dts_mr_pc_view]
-"""
+    # conn.close()
 
-df = pd.read_sql(query, conn)
-print(df)
+    return df
+
+@st.cache_resource()
+def get_obs_dict():
+    query = """
+    SELECT * FROM [dbo].[obs_well_dictionary]
+    """
+    obs_dict = get_obs_data(query)
+    return obs_dict
+
+@st.cache_resource()
+def get_obs_property():
+    query = """
+    SELECT * FROM [dbo].[obs_well_properties]
+    """
+    obs_dict = get_obs_data(query)
+    return obs_dict

@@ -94,6 +94,10 @@ with st.sidebar:
                     st.session_state.traceSelectionMatrix = pd.concat(toAppend,axis=0)
                     st.session_state.traceSelectionMatrix.drop_duplicates(inplace=True)
                 st.experimental_rerun()
+            
+            if parameterTraceAction == 'Clear Figure':
+                st.session_state.traceSelectionMatrix.loc[:,str(figureSelect)] = None
+                st.experimental_rerun()
 
 
         #Clear All Figures Action

@@ -34,7 +34,7 @@ if ['figureSelectIndex', 'listFigNames'] not in st.session_state:
     st.session_state.listFigNames = ['1','2','3','4','5','6']
 
 if ['traceSelectionMatrix'] not in st.session_state:
-    st.session_state.traceSelectionMatrix = pd.DataFrame([[np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]],columns=st.session_state.listFigNames)
+    st.session_state.traceSelectionMatrix = pd.DataFrame([],columns=st.session_state.listFigNames)
 
 # """
 # Page
@@ -86,7 +86,7 @@ with st.sidebar:
         st.write(st.session_state.traceSelectionMatrix)
 
         #Parameter Trace Submit Actions
-        if parameterTraceSubmit:
+        if parameterTraceSubmit==True:
             if parameterTraceAction == 'Add Traces':
                 for parameter in parameterToTrace:
                     parametersToAppend = pd.DataFrame([],columns=st.session_state.listFigNames)
@@ -96,11 +96,11 @@ with st.sidebar:
                     st.write(parametersToAppend)
                     st.session_state.traceSelectionMatrix = pd.concat([st.session_state.traceSelectionMatrix, parametersToAppend],axis=0)
                     st.write(st.session_state.traceSelectionMatrix)
-                    # st.session_state.traceSelectionMatrix.drop_duplicates(inplace=True)
+                    st.session_state.traceSelectionMatrix.drop_duplicates(inplace=True)
 
 
         #Clear All Figures Action
-        if clearAllTraces:
+        if clearAllTraces==True:
             st.session_state.traceSelectionMatrix = st.session_state.traceSelectionMatrix.iloc[0:0]
 
         

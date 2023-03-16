@@ -33,7 +33,7 @@ if ['figureSelectIndex', 'listFigNames'] not in st.session_state:
     st.session_state.figureSelectIndex = 0
     st.session_state.listFigNames = ['1','2','3','4','5','6']
 
-if ['traceSelectionMatrix'] not in st.session_state:
+if 'traceSelectionMatrix' not in st.session_state:
     st.write('True')
     st.session_state.traceSelectionMatrix = pd.DataFrame([],columns=st.session_state.listFigNames)
 else:

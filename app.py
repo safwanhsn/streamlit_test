@@ -91,7 +91,7 @@ with st.sidebar:
                 for parameter in parameterToTrace:
                     parametersToAppend = pd.DataFrame([],columns=st.session_state.listFigNames)
                     st.write(figureSelect)
-                    parametersToAppend.loc[:,figureSelect] = parameter
+                    parametersToAppend[figureSelect].values[:] = parameter
                     st.write(parametersToAppend)
                     toAppend = [st.session_state.traceSelectionMatrix, parametersToAppend]
                     st.session_state.traceSelectionMatrix = pd.concat(toAppend,axis=0)

@@ -36,6 +36,8 @@ if ['figureSelectIndex', 'listFigNames'] not in st.session_state:
 if ['traceSelectionMatrix'] not in st.session_state:
     st.session_state.traceSelectionMatrix = pd.DataFrame([[np.nan, np.nan, np.nan, np.nan, np.nan, np.nan]],columns=st.session_state.listFigNames)
 
+if ['list1', 'list2', 'list']
+
 # """
 # Page
 # """
@@ -92,7 +94,9 @@ with st.sidebar:
                     parametersToAppend = pd.DataFrame([],columns=st.session_state.listFigNames)
                     parametersToAppend.at[1, str(figureSelect)] = parameter
                     toAppend = [st.session_state.traceSelectionMatrix, parametersToAppend]
-                    st.session_state.traceSelectionMatrix = pd.concat(toAppend,axis=0)
+                    st.write(st.session_state.traceSelectionMatrix)
+                    st.write(parametersToAppend)
+                    st.session_state.traceSelectionMatrix = pd.concat([st.session_state.traceSelectionMatrix, parametersToAppend],axis=0)
                     # st.session_state.traceSelectionMatrix.drop_duplicates(inplace=True)
 
 

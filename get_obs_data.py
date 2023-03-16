@@ -122,6 +122,7 @@ def get_obs_data(query):
 def get_obs_dict():
     query = """
     SELECT * FROM [dbo].[obs_well_dictionary]
+    ORDER BY COMMON_WELLNAME
     """
     obs_dict = get_obs_data(query)
     return obs_dict
@@ -130,6 +131,7 @@ def get_obs_dict():
 def get_obs_property():
     query = """
     SELECT * FROM [dbo].[obs_well_properties]
+    ORDER BY COMMON_WELLNAME, PROPERTY_SHORT_NAME
     """
     obs_dict = get_obs_data(query)
     return obs_dict

@@ -70,7 +70,7 @@ with st.sidebar:
         obsAvailableParameters = obs_property[obs_property['COMMON_WELLNAME']==obsWell].PROPERTY_DESCRIPTION.unique()
 
         #! Temp form structure
-        with st.form(clear_on_submit=False):
+        with st.form("Trace Select", clear_on_submit=False):
             chartScale = int(st.slider(label='Chart Scale',min_value=1, max_value=200, value=100))
             figureSelect = st.selectbox('Figure', listFigNames, index=st.session_state.figureSelectIndex)
             parameterToTrace = st.multiselect('Parameters to Trace', obsAvailableParameters)

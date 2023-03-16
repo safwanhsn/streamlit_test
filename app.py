@@ -90,10 +90,10 @@ with st.sidebar:
             if parameterTraceAction == 'Add Traces':
                 for parameter in parameterToTrace:
                     parametersToAppend = pd.DataFrame([],columns=st.session_state.listFigNames)
-                    parametersToAppend.at[0, str(figureSelect)] = parameter
+                    parametersToAppend.at[1, str(figureSelect)] = parameter
                     toAppend = [st.session_state.traceSelectionMatrix, parametersToAppend]
                     st.session_state.traceSelectionMatrix = pd.concat(toAppend,axis=0)
-                    st.session_state.traceSelectionMatrix.drop_duplicates(inplace=True)
+                    # st.session_state.traceSelectionMatrix.drop_duplicates(inplace=True)
 
 
         #Clear All Figures Action

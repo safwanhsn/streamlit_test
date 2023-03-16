@@ -93,9 +93,7 @@ with st.sidebar:
                     toAppend = [st.session_state.traceSelectionMatrix, parametersToAppend]
                     st.session_state.traceSelectionMatrix = pd.concat(toAppend,axis=0)
                     st.session_state.traceSelectionMatrix.drop_duplicates(inplace=True)
-                    #! Or use short out refresh here
-                    st.experimental_rerun()
-            # st.experimental_data_editor(st.session_state.traceSelectionMatrix,use_container_width=True)
+                st.experimental_rerun()
 
 
         #Clear All Figures Action

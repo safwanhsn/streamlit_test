@@ -31,7 +31,7 @@ obs_property = get_obs_property()
 #Figure Properties State Variables
 if ['figureSelectIndex', 'listFigNames'] not in st.session_state:
     st.session_state.figureSelectIndex = 0
-    st.session_state.listFigNames = [1,2,3,4,5,6]
+    st.session_state.listFigNames = ['1','2','3','4','5','6']
 
 if ['traceSelectionMatrix'] not in st.session_state:
     st.session_state.traceSelectionMatrix = pd.DataFrame([],columns=st.session_state.listFigNames)
@@ -89,9 +89,9 @@ with st.sidebar:
         if parameterTraceSubmit:
             if parameterTraceAction == 'Add Traces':
                 for parameter in parameterToTrace:
-                    st.write(parameter)
                     parametersToAppend = pd.DataFrame([],columns=st.session_state.listFigNames)
-                    parametersToAppend[str(figureSelect)] = parameter
+                    st.write(figureSelect)
+                    parametersToAppend[figureSelect] = parameter
                     st.write(parametersToAppend)
                     toAppend = [st.session_state.traceSelectionMatrix, parametersToAppend]
                     st.session_state.traceSelectionMatrix = pd.concat(toAppend,axis=0)

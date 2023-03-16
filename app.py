@@ -83,12 +83,11 @@ with st.sidebar:
             parameterTraceSubmit = st.form_submit_button("Submit")
         clearAllTraces = st.button('Clear All')
 
-        st.experimental_data_editor(st.session_state.traceSelectionMatrix, use_container_width=True)
+        st.write(st.session_state.traceSelectionMatrix, use_container_width=True)
 
         #Parameter Trace Submit Actions
         if parameterTraceSubmit:
             if parameterTraceAction == 'Add Traces':
-                st.write('YES')
                 for parameter in parameterToTrace:
                     parametersToAppend = pd.DataFrame([],columns=st.session_state.listFigNames)
                     parametersToAppend[str(figureSelect)] = parameter

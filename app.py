@@ -34,7 +34,10 @@ if ['figureSelectIndex', 'listFigNames'] not in st.session_state:
     st.session_state.listFigNames = ['1','2','3','4','5','6']
 
 if ['traceSelectionMatrix'] not in st.session_state:
+    st.write('True')
     st.session_state.traceSelectionMatrix = pd.DataFrame([],columns=st.session_state.listFigNames)
+else:
+    st.write('False')
 
 # """
 # Page
@@ -101,8 +104,10 @@ with st.sidebar:
 
         #Clear All Figures Action
         if clearAllTraces==True:
-            st.session_state.traceSelectionMatrix = st.session_state.traceSelectionMatrix.iloc[0:0]
-
+            st.write('Cler True')
+            # st.session_state.traceSelectionMatrix = st.session_state.traceSelectionMatrix.iloc[0:0]
+            
+#! Move logic out of expander
         
 
 

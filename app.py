@@ -134,7 +134,9 @@ for col in st.session_state.traceSelectionMatrix.columns[0:1]:
                 ORDER BY [MD]
                 """
                 with st.spinner("Querying Data"):
-                    data = get_obs_data(query).sort_values(by='MD').reset_index(drop=True)
+                    data = get_obs_data(query)
+                    data['MD'] = data['MD'].astype(float)
+                    data = data.sort_values(by='MD').reset_index(drop=True)
                     st.write(data)
                 fig1.append_trace(go.Scatter(x=data['MNEMONIC_VALUE'], y=data['MD'], name='Test'), 1, int(col))
         except Exception as e:

@@ -126,12 +126,9 @@ for col in st.session_state.traceSelectionMatrix.columns[0:1]:
             if parameterSource == 'Log':
                 #! Or query each one from here but that will be slow
                 query = f"""
-                SELECT * FROM [dbo].[fb_logs_view]
-                WHERE [PROJECT] = '{project}' 
+                SELECT * FROM [dbo].[sh_obs_logs_vw]
                 AND [COMMON_WELLNAME] = '{obsWell}'
-                AND [FILE_MNEMONIC_NAME] = '{parameter}'
-                AND [MNEMONIC_VALUE] <> '-999.25'
-                ORDER BY [MD]
+                AND [MNEMONIC_SUFIX] = 'GR'
                 """
                 with st.spinner("Querying Data"):
                     data = get_obs_data(query)

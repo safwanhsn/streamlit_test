@@ -118,22 +118,25 @@ for col in st.session_state.traceSelectionMatrix.columns:
     
     toPlot = st.session_state.traceSelectionMatrix[col]
     for parameter in toPlot:
-        parameterSource = obs_property[(obs_property['COMMON_WELLNAME']==obsWell) \
-                                       &(obs_property['PROPERTY_SHORT_NAME'])==parameter] \
-                                       .SOURCE.iloc[0]
-        if parameterSource == 'Log':
-            #! Or query each one from here but that will be slow
-            query = f"""
-            SELECT * FROM [dbo].[fb_logs_view]
-            WHERE [PROJECT] = '{project}' 
-            AND [COMMON_WELLNAME] = '{obsWell}'
-            AND [FILE_MNEMONIC_NAME] = '{parameter}'
-            WHERE MNEMONIC_VALUE <> '-999.25'
-            ORDER BY [MD]
-            """
-            with st.spinner("Querying Data"):
-                data = get_obs_data(query)
-            fig1.append_trace(go.Scatter(x=data['MNEMONIC_VALUE'], y=data['MD'], name='Test'), 1, int(col))
+        try:
+            parameterSource = obs_property[(obs_property['COMMON_WELLNAME']==obsWell) \
+                                        &(obs_property['PROPERTY_SHORT_NAME'])==parameter] \
+                                        .SOURCE.iloc[0]
+            if parameterSource == 'Log':
+                #! Or query each one from here but that will be slow
+                query = f"""
+                SELECT * FROM [dbo].[fb_logs_view]
+                WHERE [PROJECT] = '{project}' 
+                AND [COMMON_WELLNAME] = '{obsWell}'
+                AND [FILE_MNEMONIC_NAME] = '{parameter}'
+                WHERE MNEMONIC_VALUE <> '-999.25'
+                ORDER BY [MD]
+                """
+                with st.spinner("Querying Data"):
+                    data = get_obs_data(query)
+                fig1.append_trace(go.Scatter(x=data['MNEMONIC_VALUE'], y=data['MD'], name='Test'), 1, int(col))
+        except:
+            st.warning('No Source')
 
 
 st.plotly_chart(fig1, theme="streamlit")

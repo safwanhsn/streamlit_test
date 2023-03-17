@@ -127,7 +127,7 @@ for col in st.session_state.traceSelectionMatrix.columns[0:1]:
                 #! Or query each one from here but that will be slow
                 query = f"""
                 SELECT * FROM [dbo].[sh_obs_logs_vw]
-                AND [COMMON_WELLNAME] = '{obsWell}'
+                WHERE [COMMON_WELLNAME] = '{obsWell}'
                 AND [MNEMONIC_SUFIX] = 'GR'
                 """
                 with st.spinner("Querying Data"):

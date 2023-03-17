@@ -130,7 +130,7 @@ for col in st.session_state.traceSelectionMatrix.columns:
                 WHERE [PROJECT] = '{project}' 
                 AND [COMMON_WELLNAME] = '{obsWell}'
                 AND [FILE_MNEMONIC_NAME] = '{parameter}'
-                WHERE MNEMONIC_VALUE <> '-999.25'
+                AND [MNEMONIC_VALUE] <> '-999.25'
                 ORDER BY [MD]
                 """
                 with st.spinner("Querying Data"):

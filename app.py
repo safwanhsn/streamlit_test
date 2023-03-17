@@ -142,6 +142,7 @@ for col in st.session_state.traceSelectionMatrix.columns[0:1]:
 # """
 # Visualization Properties
 # """
+fig1.update_layout(autosize=False,width=chartScale*8,height=chartScale*8, showlegend=True, yaxis_range=[0,180])
 fig1.update_xaxes(
     showgrid=True, 
     gridwidth=1, 

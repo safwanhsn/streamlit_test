@@ -122,8 +122,7 @@ for col in st.session_state.traceSelectionMatrix.columns:
         st.write(obs_property[obs_property['PROPERTY_SHORT_NAME']==parameter])
         try:
             parameterSource = obs_property[(obs_property['COMMON_WELLNAME']==obsWell) \
-                                        &(obs_property['PROPERTY_SHORT_NAME'])==parameter] \
-                                        .SOURCE.iloc[0]
+                                        &(obs_property['PROPERTY_SHORT_NAME'])==parameter].SOURCE[0]
             
 
             if parameterSource == 'Log':

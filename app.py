@@ -118,11 +118,10 @@ for col in st.session_state.traceSelectionMatrix.columns:
     
     toPlot = st.session_state.traceSelectionMatrix[col]
     for parameter in toPlot:
-        st.write(obs_property[obs_property['COMMON_WELLNAME']==obsWell])
-        st.write(obs_property[obs_property['PROPERTY_SHORT_NAME']==parameter])
+        st.write(obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME'])==parameter])
         try:
             parameterSource = obs_property[(obs_property['COMMON_WELLNAME']==obsWell) \
-                                        &(obs_property['PROPERTY_SHORT_NAME'])==parameter].SOURCE[0]
+                                        &(obs_property['PROPERTY_SHORT_NAME'])==parameter].SOURCE.unique()[0]
             
 
             if parameterSource == 'Log':

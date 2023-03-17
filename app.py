@@ -121,6 +121,7 @@ for col in st.session_state.traceSelectionMatrix.columns:
         parameterSource = obs_property[(obs_property['COMMON_WELLNAME']==obs_dict) \
                                        &(obs_property['PROPERTY_SHORT_NAME'])==toPlot] \
                                        .SOURCE.iloc[1]
+        st.write(parameterSource)
         if parameterSource == 'Log':
             #! Or query each one from here but that will be slow
             query = f"""

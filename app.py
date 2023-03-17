@@ -112,7 +112,7 @@ with st.sidebar:
 fig1 = make_subplots(rows=1, cols=len(st.session_state.listFigNames))
 
            
-for col in st.session_state.traceSelectionMatrix.columns:
+for col in st.session_state.traceSelectionMatrix.columns[0:1]:
     #! First I should query all data on a form run button at once and cache it based on the unique vals and ObsWell
     #? Function to query logs that we can cache?
     

@@ -118,7 +118,7 @@ for col in st.session_state.traceSelectionMatrix.columns:
     
     toPlot = st.session_state.traceSelectionMatrix[col]
     for parameter in toPlot:
-        st.write(obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME']==parameter)].SOURCE.to_list[0])
+        st.write(obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME']==parameter)]['SOURCE'].to_list()[0])
         try:
             parameterSource = obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME']==parameter)]['SOURCE'].reset_index(drop=True).iat[0]
 

@@ -117,7 +117,7 @@ for col in st.session_state.traceSelectionMatrix.columns:
     #? Function to query logs that we can cache?
     
     toPlot = st.session_state.traceSelectionMatrix[col]
-    for parameter in toPlot:
+    for parameter in toPlot[0:1]:
         # st.write(obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME']==parameter)]['SOURCE'].to_list()[1])
         try:
             # parameterSource = obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME']==parameter)]['SOURCE'].reset_index(drop=True).iat[0]

@@ -19,7 +19,7 @@ import altair as alt
 from plotly.subplots import make_subplots
 
 #Loading Data
-from get_obs_data import get_obs_dict, get_obs_property
+from get_obs_data import get_obs_data, get_obs_dict, get_obs_property
 # """
 # State Session Variables
 # """
@@ -99,13 +99,46 @@ with st.sidebar:
                 st.session_state.traceSelectionMatrix.loc[:,str(figureSelect)] = None
                 st.experimental_rerun()
 
+            #! Placeholder value - get the query here although later I want to unform that one and make a new form to run and in that func only query what hasn't been queried and concat that to our logs DF
+
 
         #Clear All Figures Action
         if clearAllTraces==True:
             st.session_state.traceSelectionMatrix = st.session_state.traceSelectionMatrix.iloc[0:0]
             st.experimental_rerun()
-            
-#! Move logic out of expander?
+
+
+#Visualization 
+fig1 = make_subplots(rows=1, cols=len(st.session_state.listFigNames))
+
+           
+for col in st.session_state.traceSelectionMatrix.columns:
+    #! First I should query all data on a form run button at once and cache it based on the unique vals and ObsWell
+    #? Function to query logs that we can cache?
+    
+    toPlot = st.session_state.traceSelectionMatrix[col]
+    for parameter in toPlot:
+        parameterSource = obs_property[(obs_property['COMMON_WELLNAME']==obs_dict) \
+                                       &(obs_property['PROPERTY_SHORT_NAME'])==toPlot] \
+                                       .SOURCE.iloc[1]
+        if parameterSource == 'Log':
+            #! Or query each one from here but that will be slow
+            query = f"""
+            SELECT * FROM [dbo].[fb_logs_view]
+            WHERE [PROJECT] = '{project}' 
+            AND [COMMON_WELLNAME] = '{obsWell}'
+            AND [FILE_MNEMONIC_NAME] = '{parameter}'
+            WHERE MNEMONIC_VALUE <> '-999.25'
+            ORDER BY [MD]
+            """
+            with st.spinner("Querying Data"):
+                data = get_obs_data(query)
+            fig1.append_trace(go.Scatter(x=data['MNEMONIC_VALUE'], y=data['MD'], name='Test'), 1, int(col))
+
+
+st.plotly_chart(fig1, theme="streamlit")
+
+
         
 
 

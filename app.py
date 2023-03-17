@@ -120,7 +120,7 @@ for col in st.session_state.traceSelectionMatrix.columns:
     for parameter in toPlot:
         st.write(obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME']==parameter)]['SOURCE'])
         try:
-            parameterSource = obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME']==parameter)]['SOURCE'].iat[0]
+            parameterSource = obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME']==parameter)]['SOURCE'].reset_index().iat[0]
 
             if parameterSource == 'Log':
                 #! Or query each one from here but that will be slow

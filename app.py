@@ -139,6 +139,22 @@ for col in st.session_state.traceSelectionMatrix.columns[0:1]:
         except Exception as e:
             st.warning(e)
 
+# """
+# Visualization Properties
+# """
+fig1.update_xaxes(
+    showgrid=True, 
+    gridwidth=1, 
+    nticks = 5)
+fig1.update_yaxes(matches='y')
+fig1.update_traces(hovertemplate=None)
+fig1.update_layout(
+    hovermode="y unified", 
+    title=obsWell,
+    yaxis_title="Depth (mKB)",
+    legend_title="Traces",)
+fig1['layout']['yaxis']['autorange'] = "reversed"
+
 
 st.plotly_chart(fig1, theme="streamlit")
 

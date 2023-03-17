@@ -136,8 +136,8 @@ for col in st.session_state.traceSelectionMatrix.columns:
                 with st.spinner("Querying Data"):
                     data = get_obs_data(query)
                 fig1.append_trace(go.Scatter(x=data['MNEMONIC_VALUE'], y=data['MD'], name='Test'), 1, int(col))
-        except:
-            st.warning('No Source')
+        except Exception as e:
+            st.warning(e)
 
 
 st.plotly_chart(fig1, theme="streamlit")

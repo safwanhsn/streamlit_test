@@ -35,6 +35,8 @@ if 'traceSelectionMatrix' not in st.session_state:
     st.session_state.traceSelectionMatrix = pd.DataFrame([],columns=st.session_state.listFigNames)
 
 
+
+
 # """
 # Page
 # """
@@ -47,15 +49,21 @@ with st.sidebar:
     st.title("OBS Well Analyzer")
     st.caption("Dev Build")
 
-    project = st.selectbox('Project', ['Firebag'])
-    #! Default selection and error handling
+    project = st.selectbox('Project', ['Firebag', 'MacKay River (Unavailable)'])
+
+    if project:
+        obs_dict[obs_dict['PROJECT']==project]
+         #! Default selection and error handling and filtering by project
     
     # Filter Section
     with st.expander("Filter"):
+
         #init. lists
         listParameters = ['M_GR', 'LVMIFACIES', 'I_LVMI', 'I_BMFO', 'THERMOCOUPLE_TEMP', 'DTS_TEMP']
         listObsWells = obs_dict.COMMON_WELLNAME.unique()
         #! Save hardcoded lists to a csv in data folder of github
+        #? Are these variables necessary?
+        
 
     #     surfacePad = st.multiselect('By Surface Pad', listPads)
     #     parentWell = st.multiselect('By Parent Well-Pair', listParentWells)

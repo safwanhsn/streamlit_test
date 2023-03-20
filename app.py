@@ -25,6 +25,7 @@ from get_obs_data import get_obs_data, get_obs_dict, get_obs_property
 # """
 obs_dict = get_obs_dict()
 obs_property = get_obs_property()
+staticData = pd.read_csv('data/data.csv', header=True)
 
 #Figure Properties State Variables
 if ['figureSelectIndex', 'listFigNames'] not in st.session_state:
@@ -59,9 +60,10 @@ with st.sidebar:
     with st.expander("Filter"):
 
         #init. lists
-        listParameters = ['M_GR', 'LVMIFACIES', 'I_LVMI', 'I_BMFO', 'THERMOCOUPLE_TEMP', 'DTS_TEMP']
+        listParameters = staticData.PROPERTIES.unique()
         listObsWells = obs_dict.COMMON_WELLNAME.unique()
-        #! Save hardcoded lists to a csv in data folder of github
+
+        obs_property = obs_property[obs_property['PROPERTY_DESCRIPTION'].isin(listParameters)]
         #? Are these variables necessary?
         
 
@@ -146,7 +148,6 @@ for col in st.session_state.traceSelectionMatrix.columns[0:1]:
                     data = get_obs_data(query)
                     data['MD'] = data['MD'].astype(float)
                     data = data.sort_values(by='MD').reset_index(drop=True)
-                    st.write(data)
                 fig1.append_trace(go.Scatter(x=data['MNEMONIC_VALUE'], y=data['MD'], name='Test'), 1, int(col))
         except Exception as e:
             st.warning(e)

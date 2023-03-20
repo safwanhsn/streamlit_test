@@ -135,3 +135,13 @@ def get_obs_property():
     """
     obs_dict = get_obs_data(query)
     return obs_dict
+
+def multi_filter(obs_property, listObsWells, availableParameter):
+    obs_property = obs_property[(obs_property['COMMON_WELLNAME'].isin(listObsWells)) & (obs_property['PROPERTY_DESCRIPTION'].isin(availableParameter))]
+    count = obs_property.groupby(['COMMON_WELLNAME']).count().reset_index(drop=False)
+    listFiltered = count[count['VALUE']==len(availableParameter)].COMMON_WELLNAME.unique()
+    return listFiltered
+    #! Can either now refilter count or obs property or listObsWells just return value
+
+
+                                        

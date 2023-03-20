@@ -19,7 +19,7 @@ import altair as alt
 from plotly.subplots import make_subplots
 
 #Loading Data
-from get_obs_data import get_obs_data, get_obs_dict, get_obs_property
+from get_obs_data import get_obs_data, get_obs_dict, get_obs_property, multi_filter
 # """
 # State Session Variables
 # """
@@ -73,9 +73,10 @@ with st.sidebar:
         availableParameter = st.multiselect('By Available Parameters', listParameters)
 
         if availableParameter:
-            listObsWells = obs_property[(obs_property['COMMON_WELLNAME'].isin(listObsWells)) & \
-                                        (obs_property['PROPERTY_DESCRIPTION'].isin(availableParameter))] \
-                                        .COMMON_WELLNAME.unique()
+            #? listObsWells = obs_property[(obs_property['COMMON_WELLNAME'].isin(listObsWells)) & \
+            #?                             (obs_property['PROPERTY_DESCRIPTION'].isin(availableParameter))] \
+            #?                             .COMMON_WELLNAME.unique()
+            listObsWells = multi_filter(obs_property, listObsWells, availableParameter)
 
         #Obs Well Metadata
         obsWell = st.selectbox('Observation Well', listObsWells)

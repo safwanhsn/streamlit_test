@@ -25,7 +25,7 @@ from get_obs_data import get_obs_data, get_obs_dict, get_obs_property
 # """
 obs_dict = get_obs_dict()
 obs_property = get_obs_property()
-staticData = pd.read_csv('data/data.csv', header=True)
+staticData = pd.read_csv('data/data.csv')
 
 #Figure Properties State Variables
 if ['figureSelectIndex', 'listFigNames'] not in st.session_state:

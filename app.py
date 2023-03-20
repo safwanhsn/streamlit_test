@@ -54,6 +54,7 @@ with st.sidebar:
 
     if project:
         obs_dict = obs_dict[obs_dict['PROJECT']==project]
+        obs_property = obs_property[obs_property['PROJECT']==project]
          #! Default selection and error handling and filtering by project
     
     # Filter Section

@@ -52,7 +52,7 @@ with st.sidebar:
     project = st.selectbox('Project', ['Firebag', 'MacKay River (Unavailable)'])
 
     if project:
-        obs_dict[obs_dict['PROJECT']==project]
+        obs_dict = obs_dict[obs_dict['PROJECT']==project]
          #! Default selection and error handling and filtering by project
     
     # Filter Section

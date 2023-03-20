@@ -74,13 +74,13 @@ with st.sidebar:
 
         if availableParameter:
             listObsWells = obs_property[(obs_property['COMMON_WELLNAME'].isin(listObsWells)) & \
-                                        (obs_property['PROPERTY_SHORT_NAME'].isin(availableParameter))] \
+                                        (obs_property['PROPERTY_DESCRIPTION'].isin(availableParameter))] \
                                         .COMMON_WELLNAME.unique()
 
         #Obs Well Metadata
         obsWell = st.selectbox('Observation Well', listObsWells)
-        obsWellUWI = obs_dict.loc[obs_dict['COMMON_WELLNAME'] == obsWell, 'CURRENT_UWI'].iloc[0]
-        obsWellWellboreID = obs_dict.loc[obs_dict['COMMON_WELLNAME'] == obsWell, 'SUNCOR_WELLBORE_ID'].iloc[0]
+        #* obsWellUWI = obs_dict.loc[obs_dict['COMMON_WELLNAME'] == obsWell, 'CURRENT_UWI'].iloc[0]
+        #* obsWellWellboreID = obs_dict.loc[obs_dict['COMMON_WELLNAME'] == obsWell, 'SUNCOR_WELLBORE_ID'].iloc[0]
         obsWellProperties = obs_property[obs_property['COMMON_WELLNAME']==obsWell].PROPERTY_SHORT_NAME.unique()
     
     #Trace Properties Section

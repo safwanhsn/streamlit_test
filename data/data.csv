@@ -1,21 +1,22 @@
-﻿PROPERTIES
-DTS Temperature
-Interpreted Bituminous Volume Fraction
-Interpreted Bulk Mass Gas Fraction
-Interpreted Bulk Mass Oil Fraction
-Interpreted Bulk Mass Solid Fraction
-Interpreted Bulk Mass Water Fraction
-"Interpreted Density, compensated bulk"
-Interpreted Gas Saturation
-Interpreted Log-derived Visual Mud Index
-Interpreted Oil Saturation
-Interpreted Water Saturation
-Logging While Drilling Gamma Ray
-Measured Bulk Density
-Measured Gamma Ray
-"Measured Resistivity, deep"
-"Measured Resistivity, medium"
-"Measured Resistivity, Shallow"
-Piezometer Pressure
-Piezometer Temperature
-Thermocouple Temperature
+﻿PROPERTIES,
+DTS Temperature,
+Interpreted Bituminous Volume Fraction,
+Interpreted Bulk Mass Gas Fraction,
+Interpreted Bulk Mass Oil Fraction,
+Interpreted Bulk Mass Solid Fraction,
+Interpreted Bulk Mass Water Fraction,
+"Interpreted Density, compensated bulk",
+Interpreted Gas Saturation,
+Interpreted Log-derived Visual Mud Index,
+Interpreted Oil Saturation,
+Interpreted Water Saturation,
+Logging While Drilling Gamma Ray,
+Measured Bulk Density,
+Measured Gamma Ray,
+"Measured Resistivity, deep",
+"Measured Resistivity, medium",
+"Measured Resistivity, Shallow",
+Piezometer Pressure,
+Piezometer Temperature,
+Thermocouple Temperature,
+Visual Mud Index,

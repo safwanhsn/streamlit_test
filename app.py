@@ -149,7 +149,7 @@ if plotTraces == True:
                     sample = sample.sort_values(by='MD').reset_index(drop=True)
                     fig1.append_trace(go.Scatter(x=sample['MNEMONIC_VALUE'], y=sample['MD'], name=parameter+f' {col}'), 1, int(col))
             except Exception as e:
-                st.warning(e)
+                print(e)
 
 # """
 # Visualization Properties

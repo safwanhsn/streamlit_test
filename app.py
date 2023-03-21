@@ -19,7 +19,7 @@ import altair as alt
 from plotly.subplots import make_subplots
 
 #Loading Data
-from get_obs_data import get_obs_data, get_obs_dict, get_obs_property, multi_filter
+from get_obs_data import get_obs_data, get_obs_dict, get_obs_property, get_obs_log_fb, multi_filter
 # """
 # State Session Variables
 # """
@@ -82,7 +82,8 @@ with st.sidebar:
         #Obs Well Metadata
         obsWell = st.selectbox('Observation Well', listObsWells)
         #* obsWellUWI = obs_dict.loc[obs_dict['COMMON_WELLNAME'] == obsWell, 'CURRENT_UWI'].iloc[0]
-        #* obsWellWellboreID = obs_dict.loc[obs_dict['COMMON_WELLNAME'] == obsWell, 'SUNCOR_WELLBORE_ID'].iloc[0]
+        # obsWellBoreID = obs_dict.loc[obs_dict['COMMON_WELLNAME'] == obsWell, 'SUNCOR_WELLBORE_ID'].iloc[0]
+        obsWellBoreID = obs_dict[obs_dict['COMMON_WELLNAME'] == obsWell].SUNCOR_WELLBORE_ID.unique()[0]
         obsWellProperties = obs_property[obs_property['COMMON_WELLNAME']==obsWell].PROPERTY_DESCRIPTION.unique()
     
     #Trace Properties Section
@@ -96,9 +97,11 @@ with st.sidebar:
             parameterToTrace = st.multiselect('Parameters to Trace', obsWellProperties)
             parameterTraceAction = st.selectbox("Select Action", ['Add Traces', 'Clear Figure'])
             parameterTraceSubmit = st.form_submit_button("Submit")
-        clearAllTraces = st.button('Clear All')
-
         st.experimental_data_editor(st.session_state.traceSelectionMatrix,use_container_width=True)
+        clearAllTraces = st.button('Clear All')
+        plotTraces = st.button('Plot All')
+
+        
 
         #Parameter Trace Submit Actions
         if parameterTraceSubmit==True:
@@ -127,32 +130,26 @@ with st.sidebar:
 #Visualization 
 fig1 = make_subplots(rows=1, cols=len(st.session_state.listFigNames))
 
-           
-for col in st.session_state.traceSelectionMatrix.columns[0:1]:
-    #! First I should query all data on a form run button at once and cache it based on the unique vals and ObsWell
-    #? Function to query logs that we can cache?
-    
-    toPlot = st.session_state.traceSelectionMatrix[col]
-    for parameter in toPlot[0:1]:
-        # st.write(obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME']==parameter)]['SOURCE'].to_list()[1])
-        try:
-            # parameterSource = obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME']==parameter)]['SOURCE'].reset_index(drop=True).iat[0]
-            parameterSource = 'Log'
+if plotTraces == True:
+    with st.spinner("Querying Data"):
+        #! Keep the query one time out here
+        data = get_obs_log_fb(obsWellBoreID)
+        data['MD'] = data['MD'].astype(float)
+    for col in st.session_state.traceSelectionMatrix.columns:
+        #! First I should query all data on a form run button at once and cache it based on the unique vals and ObsWell
+        toPlot = st.session_state.traceSelectionMatrix[col]
+        for parameter in toPlot:
+            # st.write(obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME']==parameter)]['SOURCE'].to_list()[1])
+            try:
+                # parameterSource = obs_property[(obs_property['COMMON_WELLNAME']==obsWell)&(obs_property['PROPERTY_SHORT_NAME']==parameter)]['SOURCE'].reset_index(drop=True).iat[0]
+                parameterSource = 'Log' #! Fix this
 
-            if parameterSource == 'Log':
-                #! Or query each one from here but that will be slow
-                query = f"""
-                SELECT * FROM [dbo].[sh_obs_logs_vw]
-                WHERE [COMMON_WELLNAME] = '{obsWell}'
-                AND [MNEMONIC_SUFIX] = 'GR'
-                """
-                with st.spinner("Querying Data"):
-                    data = get_obs_data(query)
-                    data['MD'] = data['MD'].astype(float)
-                    data = data.sort_values(by='MD').reset_index(drop=True)
-                fig1.append_trace(go.Scatter(x=data['MNEMONIC_VALUE'], y=data['MD'], name='Test'), 1, int(col))
-        except Exception as e:
-            st.warning(e)
+                if parameterSource == 'Log':
+                    sample = data[data['MNEMONIC_NAME']==parameter]
+                    sample = sample.sort_values(by='MD').reset_index(drop=True)
+                    fig1.append_trace(go.Scatter(x=sample['MNEMONIC_VALUE'], y=sample['MD'], name=parameter+f' {col}'), 1, int(col))
+            except Exception as e:
+                st.warning(e)
 
 # """
 # Visualization Properties

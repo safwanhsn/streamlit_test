@@ -136,6 +136,16 @@ def get_obs_property():
     obs_dict = get_obs_data(query)
     return obs_dict
 
+@st.cache_resource()
+def get_obs_log_fb(wellboreID, property):
+    query = f"""
+    SELECT * FROM [dbo].[obs_well_logs_fb]
+    WHERE SUNCOR_WELLBORE_ID = '{wellboreID}'
+    """
+    obs_log = get_obs_data(query)
+    return obs_log
+
+
 def multi_filter(obs_property, listObsWells, availableParameter):
     obs_property = obs_property[(obs_property['COMMON_WELLNAME'].isin(listObsWells)) & (obs_property['PROPERTY_DESCRIPTION'].isin(availableParameter))]
     count = obs_property.groupby(['COMMON_WELLNAME']).count().reset_index(drop=False)

@@ -83,8 +83,9 @@ with st.sidebar:
         obsWell = st.selectbox('Observation Well', listObsWells)
         #* obsWellUWI = obs_dict.loc[obs_dict['COMMON_WELLNAME'] == obsWell, 'CURRENT_UWI'].iloc[0]
         # obsWellBoreID = obs_dict.loc[obs_dict['COMMON_WELLNAME'] == obsWell, 'SUNCOR_WELLBORE_ID'].iloc[0]
-        obsWellBoreID = obs_dict[obs_dict['COMMON_WELLNAME'] == obsWell].SUNCOR_WELLBORE_ID.unique()[0]
-        obsWellProperties = obs_property[obs_property['COMMON_WELLNAME']==obsWell].PROPERTY_DESCRIPTION.unique()
+        if obsWell:
+            obsWellBoreID = obs_dict[obs_dict['COMMON_WELLNAME'] == obsWell].SUNCOR_WELLBORE_ID.unique()[0]
+            obsWellProperties = obs_property[obs_property['COMMON_WELLNAME']==obsWell].PROPERTY_DESCRIPTION.unique()
     
     #Trace Properties Section
     with st.expander('Trace Properties'):

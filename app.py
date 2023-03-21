@@ -85,7 +85,7 @@ with st.sidebar:
         # obsWellBoreID = obs_dict.loc[obs_dict['COMMON_WELLNAME'] == obsWell, 'SUNCOR_WELLBORE_ID'].iloc[0]
         if obsWell:
             obsWellBoreID = obs_dict[obs_dict['COMMON_WELLNAME'] == obsWell].SUNCOR_WELLBORE_ID.unique()[0]
-            obsWellProperties = obs_property[obs_property['COMMON_WELLNAME']==obsWell].PROPERTY_DESCRIPTION.unique()
+        obsWellProperties = obs_property[obs_property['COMMON_WELLNAME']==obsWell].PROPERTY_DESCRIPTION.unique()
     
     #Trace Properties Section
     with st.expander('Trace Properties'):

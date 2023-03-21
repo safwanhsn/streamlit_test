@@ -137,7 +137,7 @@ def get_obs_property():
     return obs_dict
 
 # @st.cache_resource()
-def get_obs_log_fb(wellboreID, property):
+def get_obs_log_fb(wellboreID):
     query = f"""
     SELECT * FROM [dbo].[obs_well_logs_fb]
     WHERE SUNCOR_WELLBORE_ID = '{wellboreID}'

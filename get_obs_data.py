@@ -136,7 +136,7 @@ def get_obs_property():
     obs_dict = get_obs_data(query)
 
     #Append Local Data
-    conv_top = pd.read_excel('data/fb-prob-tops.xlsx')
+    # conv_top = pd.read_excel('data/fb-prob-tops.xlsx')
 
 
 
@@ -169,3 +169,4 @@ def get_conv_top():
     # use variable for obs well UWI to locate data in list
     # Visualize the data :)
     #! Placeholder / WIP function for the current Excel - Temporary Model for FB
+    pass

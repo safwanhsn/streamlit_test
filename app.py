@@ -96,14 +96,16 @@ with st.sidebar:
         with st.form("Trace Select", clear_on_submit=False):
             chartScale = int(st.slider(label='Chart Scale',min_value=1, max_value=200, value=100))
             figureSelect = st.selectbox('Figure', st.session_state.listFigNames, index=st.session_state.figureSelectIndex)
-            parameterToTrace = st.multiselect('Parameters to Trace', obsWellProperties)
-            parameterTraceAction = st.selectbox("Select Action", ['Add Traces', 'Clear Figure'])
             expParameterTraceAction = option_menu(
                 None,
                 ["Add Traces", "Clear Figure"], 
                 icons=['arrow-bar-up', 'x-circle'],
                 default_index=0
                 )
+            if expParameterTraceAction == 'Add Traces':
+                parameterToTrace = st.multiselect('Parameters to Trace', obsWellProperties)
+                parameterTraceAction = st.selectbox("Select Action", ['Add Traces', 'Clear Figure'])
+            
             parameterTraceSubmit = st.form_submit_button("Submit")
         st.experimental_data_editor(st.session_state.traceSelectionMatrix,use_container_width=True)
         clearAllTraces = st.button('Clear All')

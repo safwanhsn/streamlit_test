@@ -101,7 +101,7 @@ with st.sidebar:
             expParameterTraceAction = option_menu(
                 ["Add Traces", "Clear Figure"], 
                 icons=['arrow-bar-up', 'x-circle'],
-                default_index=0, orientation="horizontal"
+                default_index=0
                 )
             parameterTraceSubmit = st.form_submit_button("Submit")
         st.experimental_data_editor(st.session_state.traceSelectionMatrix,use_container_width=True)

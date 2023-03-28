@@ -99,10 +99,9 @@ with st.sidebar:
             parameterToTrace = st.multiselect('Parameters to Trace', obsWellProperties)
             parameterTraceAction = st.selectbox("Select Action", ['Add Traces', 'Clear Figure'])
             expParameterTraceAction = option_menu(
-                "Select Action", 
                 ["Add Traces", "Clear Figure"], 
-                icons=['house', 'cloud-upload'],
-                menu_icon="cast", default_index=0, orientation="horizontal"
+                icons=['arrow-bar-up', 'x-circle'],
+                default_index=0, orientation="horizontal"
                 )
             parameterTraceSubmit = st.form_submit_button("Submit")
         st.experimental_data_editor(st.session_state.traceSelectionMatrix,use_container_width=True)

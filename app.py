@@ -99,6 +99,7 @@ with st.sidebar:
             parameterToTrace = st.multiselect('Parameters to Trace', obsWellProperties)
             parameterTraceAction = st.selectbox("Select Action", ['Add Traces', 'Clear Figure'])
             expParameterTraceAction = option_menu(
+                None,
                 ["Add Traces", "Clear Figure"], 
                 icons=['arrow-bar-up', 'x-circle'],
                 default_index=0

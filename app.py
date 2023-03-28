@@ -178,13 +178,16 @@ fig1['layout']['yaxis']['autorange'] = "reversed"
 # """
 # Main Grid Elements
 # """
-expParameterTraceAction = option_menu(
-                None,
-                ["Add Traces", "Pad Trends", "Parent SAGD"], 
-                icons=['arrow-bar-up', 'x-circle'],
-                default_index=0, orientation="horizontal"
-                )
-st.plotly_chart(fig1, theme="streamlit")
+# expParameterTraceAction = option_menu(
+#                 None,
+#                 ["Add Traces", "Pad Trends", "Parent SAGD"], 
+#                 icons=['arrow-bar-up', 'x-circle'],
+#                 default_index=0, orientation="horizontal"
+#                 )
+from streamlit_elements import elements, mui, html
+
+with elements("plots"):
+    st.plotly_chart(fig1, theme="streamlit")
 
 
         

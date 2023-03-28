@@ -134,6 +134,12 @@ def get_obs_property():
     ORDER BY COMMON_WELLNAME, PROPERTY_SHORT_NAME
     """
     obs_dict = get_obs_data(query)
+
+    #Append Local Data
+    conv_top = pd.read_excel('data/fb-prob-tops.xlsx')
+
+
+
     return obs_dict
 
 # @st.cache_resource()
@@ -154,4 +160,12 @@ def multi_filter(obs_property, listObsWells, availableParameter):
     #! Can either now refilter count or obs property or listObsWells just return value
 
 
-                                        
+def get_conv_top():
+    #! Defining workflow
+    # Add a step either in the obs property pull or directly after to append Conv top to it
+    # Add conv top to the data search
+    # Make the search item "local"
+    # If local - search local - or if conv. top - make special case to query this function
+    # use variable for obs well UWI to locate data in list
+    # Visualize the data :)
+    #! Placeholder / WIP function for the current Excel - Temporary Model for FB

@@ -8,4 +8,5 @@ azure-identity==1.12.0
 azure-storage-blob==12.15.0
 azure-storage-file-datalake==12.10.0
 streamlit-aggrid==0.3.4
+streamlit-option-menu==0.3.2
 PIconnect==0.10.6

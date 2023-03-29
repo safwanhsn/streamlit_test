@@ -223,7 +223,8 @@ with elements("dashboard"):
     with dashboard.Grid(layout):
         # mui.Paper("First item", key="first_item")
 
-        mui.Paper("Second item (cannot drag)", key="second_item")
+        # mui.Paper("Second item (cannot drag)", key="second_item")
+        mui.TextField(key="second_item")
         mui.Paper("Third item (cannot resize)", key="third_item")
         with mui.Box(sx={"height": 500}, key="first_item"):
             st.plotly_chart(fig1, theme="streamlit")

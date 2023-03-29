@@ -226,50 +226,51 @@ with elements("dashboard"):
         mui.Paper("Second item (cannot drag)", key="second_item")
         mui.Paper("Third item (cannot resize)", key="third_item")
         with mui.Box(sx={"height": 500}, key="first_item"):
-                nivo.Radar(
-                    data=DATA,
-                    keys=[ "chardonay", "carmenere", "syrah" ],
-                    indexBy="taste",
-                    valueFormat=">-.2f",
-                    margin={ "top": 70, "right": 80, "bottom": 40, "left": 80 },
-                    borderColor={ "from": "color" },
-                    gridLabelOffset=36,
-                    dotSize=10,
-                    dotColor={ "theme": "background" },
-                    dotBorderWidth=2,
-                    motionConfig="wobbly",
-                    legends=[
-                        {
-                            "anchor": "top-left",
-                            "direction": "column",
-                            "translateX": -50,
-                            "translateY": -40,
-                            "itemWidth": 80,
-                            "itemHeight": 20,
-                            "itemTextColor": "#999",
-                            "symbolSize": 12,
-                            "symbolShape": "circle",
-                            "effects": [
-                                {
-                                    "on": "hover",
-                                    "style": {
-                                        "itemTextColor": "#000"
-                                    }
-                                }
-                            ]
-                        }
-                    ],
-                    theme={
-                        "background": "#FFFFFF",
-                        "textColor": "#31333F",
-                        "tooltip": {
-                            "container": {
-                                "background": "#FFFFFF",
-                                "color": "#31333F",
-                            }
-                        }
-                    }
-                )
+            st.plotly_chart(fig1, theme="streamlit")
+                # nivo.Radar(
+                #     data=DATA,
+                #     keys=[ "chardonay", "carmenere", "syrah" ],
+                #     indexBy="taste",
+                #     valueFormat=">-.2f",
+                #     margin={ "top": 70, "right": 80, "bottom": 40, "left": 80 },
+                #     borderColor={ "from": "color" },
+                #     gridLabelOffset=36,
+                #     dotSize=10,
+                #     dotColor={ "theme": "background" },
+                #     dotBorderWidth=2,
+                #     motionConfig="wobbly",
+                #     legends=[
+                #         {
+                #             "anchor": "top-left",
+                #             "direction": "column",
+                #             "translateX": -50,
+                #             "translateY": -40,
+                #             "itemWidth": 80,
+                #             "itemHeight": 20,
+                #             "itemTextColor": "#999",
+                #             "symbolSize": 12,
+                #             "symbolShape": "circle",
+                #             "effects": [
+                #                 {
+                #                     "on": "hover",
+                #                     "style": {
+                #                         "itemTextColor": "#000"
+                #                     }
+                #                 }
+                #             ]
+                #         }
+                #     ],
+                #     theme={
+                #         "background": "#FFFFFF",
+                #         "textColor": "#31333F",
+                #         "tooltip": {
+                #             "container": {
+                #                 "background": "#FFFFFF",
+                #                 "color": "#31333F",
+                #             }
+                #         }
+                #     }
+                # )
 
     # If you want to retrieve updated layout values as the user move or resize dashboard items,
     # you can pass a callback to the onLayoutChange event parameter.

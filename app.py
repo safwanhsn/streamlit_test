@@ -191,6 +191,16 @@ st.plotly_chart(fig1, theme="streamlit")
 
 from streamlit_elements import elements, mui, html, dashboard
 
+from streamlit_elements import nivo
+
+DATA = [
+    { "taste": "fruity", "chardonay": 93, "carmenere": 61, "syrah": 114 },
+    { "taste": "bitter", "chardonay": 91, "carmenere": 37, "syrah": 72 },
+    { "taste": "heavy", "chardonay": 56, "carmenere": 95, "syrah": 99 },
+    { "taste": "strong", "chardonay": 64, "carmenere": 90, "syrah": 30 },
+    { "taste": "sunny", "chardonay": 119, "carmenere": 94, "syrah": 103 },
+]
+
 with elements("dashboard"):
 
     # You can create a draggable and resizable dashboard using
@@ -215,34 +225,7 @@ with elements("dashboard"):
 
         mui.Paper("Second item (cannot drag)", key="second_item")
         mui.Paper("Third item (cannot resize)", key="third_item")
-
-    # If you want to retrieve updated layout values as the user move or resize dashboard items,
-    # you can pass a callback to the onLayoutChange event parameter.
-
-    # def handle_layout_change(updated_layout):
-    #     # You can save the layout in a file, or do anything you want with it.
-    #     # You can pass it back to dashboard.Grid() if you want to restore a saved layout.
-    #     print(updated_layout)
-
-    # with dashboard.Grid(layout, onLayoutChange=handle_layout_change):
-    #     mui.Paper("First item", key="first_item")
-    #     mui.Paper("Second item (cannot drag)", key="second_item")
-    #     mui.Paper("Third item (cannot resize)", key="third_item")
-        with elements("nivo_charts", key="first-item"):
-
-            # Streamlit Elements includes 45 dataviz components powered by Nivo.
-
-            from streamlit_elements import nivo
-
-            DATA = [
-                { "taste": "fruity", "chardonay": 93, "carmenere": 61, "syrah": 114 },
-                { "taste": "bitter", "chardonay": 91, "carmenere": 37, "syrah": 72 },
-                { "taste": "heavy", "chardonay": 56, "carmenere": 95, "syrah": 99 },
-                { "taste": "strong", "chardonay": 64, "carmenere": 90, "syrah": 30 },
-                { "taste": "sunny", "chardonay": 119, "carmenere": 94, "syrah": 103 },
-            ]
-
-            with mui.Box(sx={"height": 500}):
+        with mui.Box(sx={"height": 500}, key="first_item"):
                 nivo.Radar(
                     data=DATA,
                     keys=[ "chardonay", "carmenere", "syrah" ],
@@ -287,6 +270,25 @@ with elements("dashboard"):
                         }
                     }
                 )
+
+    # If you want to retrieve updated layout values as the user move or resize dashboard items,
+    # you can pass a callback to the onLayoutChange event parameter.
+
+    # def handle_layout_change(updated_layout):
+    #     # You can save the layout in a file, or do anything you want with it.
+    #     # You can pass it back to dashboard.Grid() if you want to restore a saved layout.
+    #     print(updated_layout)
+
+    # with dashboard.Grid(layout, onLayoutChange=handle_layout_change):
+    #     mui.Paper("First item", key="first_item")
+    #     mui.Paper("Second item (cannot drag)", key="second_item")
+    #     mui.Paper("Third item (cannot resize)", key="third_item")
+
+            # Streamlit Elements includes 45 dataviz components powered by Nivo.
+
+            
+
+            
 
 
         

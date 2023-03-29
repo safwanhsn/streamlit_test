@@ -189,12 +189,14 @@ fig1['layout']['yaxis']['autorange'] = "reversed"
 
 st.plotly_chart(fig1, theme="streamlit")
 
+from streamlit_elements import elements, mui, html, dashboard
+
 with elements("dashboard"):
 
     # You can create a draggable and resizable dashboard using
     # any element available in Streamlit Elements.
 
-    from streamlit_elements import elements, mui, html, dashboard
+    
 
     # First, build a default layout for every element you want to include in your dashboard
 

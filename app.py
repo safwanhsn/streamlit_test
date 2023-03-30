@@ -192,7 +192,7 @@ from streamlit_quill import st_quill
 
 with chart_container(data):
     st.plotly_chart(fig1, theme="streamlit")
-with st.form('Comments', clear_on_submit=False)
+with st.form('Comments', clear_on_submit=False):
     content = st_quill()
     pa = st.form_submit_button("Submit")
 

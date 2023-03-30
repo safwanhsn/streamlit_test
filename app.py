@@ -126,6 +126,8 @@ with st.sidebar:
             st.session_state.traceSelectionMatrix = st.session_state.traceSelectionMatrix.iloc[0:0]
             st.experimental_rerun()
 
+    with st.expander('Layout Editor'):
+        st.selectbox('Element 1', ['Vertical View', 'Temperature Trend', 'Parent Data', 'Notes'])
 
 #Visualization 
 fig1 = make_subplots(rows=1, cols=len(st.session_state.listFigNames))

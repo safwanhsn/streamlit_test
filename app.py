@@ -7,6 +7,8 @@ from st_aggrid import AgGrid
 from streamlit_option_menu import option_menu
 import streamlit as st 
 
+st.set_page_config(page_title='OBS Well Analyzer', layout="wide")
+
 #Computation
 import pandas as pd
 import numpy as np 
@@ -42,9 +44,6 @@ if 'traceSelectionMatrix' not in st.session_state:
 # """
 # Page
 # """
-
-#Page Config
-# st.set_page_config(page_title='OBS Well Analyzer')
 
 #Sidebar
 with st.sidebar:
